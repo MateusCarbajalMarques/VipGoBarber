@@ -69,7 +69,7 @@ const SignUp: React.FC = () => {
       Alert.alert('Erro na autenticação', 'O correu um erro ao fazer login')
     }
 
-  },[]);
+  },[navigation]);
 
   return (
     <>
@@ -145,7 +145,7 @@ const SignUp: React.FC = () => {
           />
 
           </Form>
-          <Button onPress={() => formRef.current?.submitForm()}>Entrar</Button>
+          <Button onPress={() => formRef.current?.submitForm()}>Cadastrar</Button>
 
 
 

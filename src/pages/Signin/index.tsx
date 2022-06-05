@@ -7,6 +7,7 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { useAuth } from '../../hooks/auth';
 
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountText } from './styles';
 import logoImg from '../../assets/logo.png';
@@ -21,8 +22,13 @@ const SignIn: React.FC = () => {
 
   const formRef = useRef<FormHandles>(null);
   const passowrdInputRef = useRef<TextInput>(null);
+
   const navigation = useNavigation<any>();
 
+
+  const {signIn, user} = useAuth();
+
+  console.log(user);
   const  handleSignIn = useCallback(async(data: SignInFormData) => {
 
     try {
@@ -36,10 +42,10 @@ const SignIn: React.FC = () => {
         abortEarly:false,
       });
 
-      //await SignIn({
-        //email: data.email,
-        //password: data.password
-     // })
+      await signIn({
+        email: data.email,
+        password: data.password
+      })
 
 
     }catch (err:any) {
@@ -51,7 +57,7 @@ const SignIn: React.FC = () => {
       Alert.alert('Erro na autenticação', 'O correu um erro ao fazer login')
     }
 
-  },[]);
+  },[signIn]);
   return (
     <>
       <KeyboardAvoidingView
@@ -98,7 +104,7 @@ const SignIn: React.FC = () => {
             </Form>
             <Button onPress={() => {
               formRef.current?.submitForm();
-            }}>Cadastrar</Button>
+            }}>Entrar</Button>
 
 
             <ForgotPassword onPress={() => { }} >
